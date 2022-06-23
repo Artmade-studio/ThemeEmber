@@ -1,0 +1,85 @@
+---
+import Footer from "@/components/Footer";
+// import Nav from "$containers/Nav";
+import Nav from "@/components/Nav";
+import "../styles/global.css";
+
+const defaultContent = {
+  title: "Ember | Home",
+  description:
+    "donation system, bans, loading screen & landing/index",
+  image: "/asset/logoipsum",
+  imageAlt: "logo",
+  type: "website",
+};
+const { content = defaultContent } = Astro.props;
+const url = Astro.canonicalURL;
+// const origin = Astro.canonicalURL.origin
+---
+
+<html class="scroll-smooth" lang="en">
+
+<head>
+  <title>{content.title}</title>
+  <link rel="canonical" href={url} />
+  <meta name="author" content="Mouktar" />
+  <meta name="description" content={content.description} />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, height=device-height,viewport-fit=cover,initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+  <!-- Include only the reset -->
+  <!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css"
+      integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8="
+      crossorigin="anonymous"
+    /> -->
+  <!-- or include the full Satellite theme -->
+  <!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.4.5/themes/satellite-min.css"
+      integrity="sha256-TehzF/2QvNKhGQrrNpoOb2Ck4iGZ1J/DI4pkd2oUsBc="
+      crossorigin="anonymous"
+    /> -->
+
+  <meta property="og:type" content={content.type} />
+  <meta property="og:url" content={url} />
+  <meta property="og:title" content={content.title} />
+  <meta property="og:description" content={content.description} />
+  <meta property="og:image" content="/avatar.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={content.title} />
+  <meta name="twitter:description" content={content.description} />
+  <meta name="twitter:image" content={`/asset/Banner.png`} />
+
+  <script>
+    const root = document.documentElement;
+    const theme = localStorage.getItem("theme");
+    if (
+      theme === "dark" ||
+      (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+  </script>
+</head>
+
+<body class="bg-white dark:bg-neutral-900">
+  <header>
+    <Nav client:load />
+  </header>
+  <slot />
+  <Footer />
+</body>
+
+</html>
